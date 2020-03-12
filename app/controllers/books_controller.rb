@@ -1,4 +1,4 @@
-class TodolistsController < ApplicationController
+class BooksController < ApplicationController
   # 投稿・一覧設定
   def index
   	# Viewへ渡すためのインスタンス変数に空のモデルオブジェクトを生成する。
@@ -9,19 +9,23 @@ class TodolistsController < ApplicationController
 
   # 投稿設定
   def create
+
   	# ストロングパラメータを使用
   	@book = Book.new(book_params)
-    # DBに保存
-  	if @book.save
-    # サクセスメッセージ表示
-    flash[:notice] = "Book was successfully created."
-  	# 詳細画面へリダイレクト
-  	redirect_to todolist_path(book.id)
-
-  else
     @books = Book.all
-    render :index
-  end
+      ### 投稿時の条件分岐 ###
+      # DBに保存
+  	 if @book.save
+      # サクセスメッセージ表示
+      flash[:notice] = "Book was successfully created."
+  	  # 詳細画面へリダイレクト
+  	  redirect_to book_path(@book.id)
+      else
+      #@books = Book.all
+      flash[:alert] = "ERROR!! can't be blank"
+      render :index
+      end
+
   end
 
   # 詳細ページ設定
@@ -41,7 +45,7 @@ class TodolistsController < ApplicationController
     # DBに上書き
     book.update(book_params)
     # 投稿・一覧ページへリダイレクト
-    redirect_to todolist_path(book.id)
+    redirect_to book_path(book.id)
     # サクセスメッセージ表示
     flash[:notice] = "Book was successfully updated."
   end
@@ -53,13 +57,13 @@ class TodolistsController < ApplicationController
     # データ（レコード）を削除
     book.destroy
     # 投稿・一覧画面へリダイレクト
-    redirect_to todolists_path
+    redirect_to books_path
   end
 
   # 戻る設定
   def back
     # 投稿・一覧設定へリダイレクト
-    redirect_to todolists_path
+    redirect_to books_path
   end
 
   private

@@ -1,22 +1,23 @@
 Rails.application.routes.draw do
-  get 'todolists/index'
+  ##get 'books/index'
   get 'homes/top'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root :to => 'homes#top'
 
-  post 'todolists' => 'todolists#create'
+  # post 'books' => 'books#create'
+
+
+  resources :books
 
   # 投稿・一覧ページに移動
-  get 'todolists' => 'todolists#index'
+  ##get 'books' => 'books#index', as: 'books'
   # 詳細ページに移動
-  get 'todolists/:id' => 'todolists#show', as: 'todolist'
+  ##get 'books/:id' => 'books#show', as: 'book'
   # 編集ページに移動
-  get 'todolists/:id/edit' => 'todolists#edit', as: 'edit_todolist'
+  ##get 'books/:id/edit' => 'books#edit', as: 'edit_book'
   # 編集部分を更新
-  patch 'todolists/:id' => 'todolists#update', as: 'update_todolist'
-  # 不要なページを削除
-  delete 'todolists/:id' => 'todolists#destroy', as: 'destroy_todolist'
+  ##delete 'books/:id' => 'books#destroy', as: 'destroy_book'
   # 投稿・一覧ページに戻る
-  get 'todolists/:id/back' => 'todolists#back', as: 'back_todolist'
+  get 'books/:id/back' => 'books#back', as: 'back_book'
 
 end

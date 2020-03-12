@@ -1,3 +1,5 @@
+
+
 <!-- 投稿・更新時にサクセスメッセージ表示 -->
 <% if flash[:notice] %>
 	<div class = "flash">
@@ -5,11 +7,12 @@
 	</div>
 <% end %>
 
+
 <p>Title: <%= @book.title %></p>
 <p>Body: <%= @book.body %></p>
 
 <!-- 編集画面にアクセス -->
-<%= link_to "Edit", edit_todolist_path(@book.id) %>
+<%= link_to "Edit", edit_book_path(@book.id) %>
 |
 <!-- 投稿・一覧画面に戻る -->
-<%= link_to "Back", back_todolist_path(@book.id) %>
+<%= link_to 'Back', '/books' %>
